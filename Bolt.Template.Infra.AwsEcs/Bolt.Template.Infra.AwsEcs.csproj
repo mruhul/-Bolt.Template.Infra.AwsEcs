@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageType>Template</PackageType>
+    <PackageVersion>0.0.1-beta008</PackageVersion>
+    <PackageId>Bolt.Template.Infra.AwsEcs</PackageId>
+    <Title>Template For AWS ECS infra setup</Title>
+    <Authors>Mohammad Ruhul Amin</Authors>
+    <Description>Templates to use when creating an aws infra with ECS Fargate.</Description>
+    <PackageTags>dotnet-new;templates;Bolt.Template.Infra.AwsEcs</PackageTags>
+    
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
+    
+    <TargetFramework>net5.0</TargetFramework>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="contents\**\*" />
+    <Compile Remove="**\*" />
+  </ItemGroup>
+  
+</Project>

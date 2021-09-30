@@ -1,0 +1,31 @@
+name: .NET Core
+
+on:
+  push:
+    branches: [ main ]
+    tags: release-**
+  pull_request:
+    branches: [ main ]
+
+jobs:
+         
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.x'
+      - name: Install dependencies
+        run: dotnet restore ./Bolt.Template.Infra.AwsEcs.sln
+      - name: Build
+        run: dotnet build ./Bolt.Template.Infra.AwsEcs.sln --configuration Release --no-restore
+      - name: Test
+        run: dotnet test ./Bolt.Template.Infra.AwsEcs.sln --no-restore --verbosity normal
+      - name: Pack
+        run: dotnet pack ./Bolt.Template.Infra.AwsEcs/Bolt.Template.Infra.AwsEcs.csproj -c Release --no-build --output nupkgs
+      - name: Publish
+        run: dotnet nuget push nupkgs/**.nupkg -s https://www.nuget.org/api/v2/package/ -k ${{ secrets.nugetkey }} --skip-duplicate

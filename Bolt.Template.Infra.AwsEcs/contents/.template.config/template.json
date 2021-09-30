@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Ruhul Amin",
+  "classifications": [ "AWS/Infra" ],
+  "identity": "Bolt.Template.Infra.AwsEcs",
+  "name": "Bolt.Template.Infra.AwsEcs",
+  "shortName": "bolt-infra-aws-ecs",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "Bolt.Sample.Infra",
+  "preferNameDirectory": true,
+  "symbols": {
+    "tfBucket": {
+      "type": "parameter",
+      "description": "Name of the bucket where the terraform state will save.",
+      "isRequired": true,
+      "replaces": "__tf_bucket__"
+    },
+    "tfBucketRegion": {
+      "type": "parameter",
+      "description": "Region of the bucket where terraform state will save.",
+      "defaultValue": "ap-southeast-2",
+      "replaces": "__tf_bucket_region__"
+    },
+    "group": {
+      "type": "parameter",
+      "description": "Name of group e.g retail",
+      "isRequired": true,
+      "replaces": "__group__"
+    },
+    "vpcCidr": {
+      "type": "parameter",
+      "description": "VPC cidr range",
+      "defaultValue": "10.10.0.0/16",
+      "replaces": "__vpc_cidr__"
+    },
+    "stackPrefix": {
+      "type": "parameter",
+      "description": "prefix of the stack",
+      "defaultValue": "bolt",
+      "replaces": "__stack_prefix__"
+    },
+    "azCount": {
+      "type": "parameter",
+      "description": "Number of availability zones to use",
+      "defaultValue": "2",
+      "replaces": "__az_count__"
+    }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": [
+            "**/[Bb]in/**",
+            "**/[Oo]bj/**",
+            ".template.config/**/*",
+            "**/*.filelist",
+            "**/*.user",
+            "**/*.lock.json",
+            "**/.vs/**",
+            "**/.git/**",
+            "**/logs/**",
+            "**/Repositories/**",
+            "**/TestReports/**",
+            "**/.terraform.lock.hcl",
+            "**/.terraform/.terrform/**"
+          ]
+        }
+      ]
+    }
+  ]
+}
